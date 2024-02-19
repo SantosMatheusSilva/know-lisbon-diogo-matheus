@@ -1,0 +1,13 @@
+.ElementsHomePage {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 200px;
+    margin-top: 200px;
+}
+
+.ElementsHomePage h2 {
+    margin-bottom: 200px;
+    
+}
