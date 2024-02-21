@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import ButtonRemove from '../components/ButtonRemove';
+import ButtonEdit from '../components/ButtonEdit';
+import { Link } from 'react-router-dom';
 
 export default function ToKnowTheCityDetailsPage() {
   const [data, setData] = useState([]);
@@ -11,43 +13,54 @@ export default function ToKnowTheCityDetailsPage() {
   useEffect(() => {
     axios.get('http://localhost:5000/data')
       .then(res => {
-        setData(res.data);
-        setFilteredData(res.data.filter(item => item.type === "outdoor activity" || item.type === "fitness/wellness"));
+        const filtered = res.data.filter(item => ["outdoor activity", "fitness/wellness"].includes(item.type));
+        setData(filtered);
+        setFilteredData(filtered);
       })
       .catch(err => console.log(err));
   }, []);
 
+  const filterData = (searchTerm) => {
+    if (searchTerm === '') {
+      return data.filter(item => ["outdoor activity", "fitness/wellness"].includes(item.type));
+    } 
+    return data.filter(item =>
+      item.name.toLowerCase().includes(searchTerm) ||
+      item.type.toLowerCase().includes(searchTerm) ||
+      item.address.toLowerCase().includes(searchTerm) ||
+      item.description.toLowerCase().includes(searchTerm)
+    ).filter(item => ["outdoor activity", "fitness/wellness"].includes(item.type));
+  };
+
   const handleSearch = (searchTerm) => {
     setSearchTerm(searchTerm);
-    if (searchTerm === '') {
-      setFilteredData(data.filter(item => item.type === "outdoor activity" || item.type === "fitness/wellness"));
-    } else {
-      const filteredData = data.filter(item =>
-        item.name.toLowerCase().includes(searchTerm) ||
-        item.type.toLowerCase().includes(searchTerm) ||
-        item.address.toLowerCase().includes(searchTerm) ||
-        item.description.toLowerCase().includes(searchTerm)
-      ).filter(item => item.type === "outdoor activity" || item.type === "fitness/wellness");
-      setFilteredData(filteredData);
-    }
+    setFilteredData(filterData(searchTerm));
+  };
+
+  const handleRemove = (itemToRemove) => {
+    const updatedData = data.filter(item => item.id !== itemToRemove.id);
+    setData(updatedData);
+    setFilteredData(filterData(searchTerm));
+  };
+
+  const handleEdit = (updatedItem) => {
+    const updatedData = data.map(item => (item.id === updatedItem.id ? updatedItem : item));
+    setData(updatedData);
+    setFilteredData(filterData(searchTerm));
   };
 
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      {
-        filteredData && filteredData.map(item=> {
-            return (
-                <div key={item.id}>
-                    <p>{item.image}</p>
-                    <h2>{item.name}</h2>
-                    <p>{item.address}</p>
-                    <p>{item.description}</p>   
-                    <ButtonRemove currentItem={item}/>    
-                </div>
-            )
-        })
-      }
+      {filteredData.map(item => (
+        <div key={item.id}>
+          <p>{item.image}</p>
+          <Link to={`/place-detail-page/${item.id}`}><h2>{item.name}</h2></Link>
+          <p>{item.address}</p>
+          <ButtonRemove currentItem={item} onRemove={handleRemove} />
+          <ButtonEdit currentItem={item} onEdit={handleEdit} />
+        </div>
+      ))}
     </div>
   );
 }
