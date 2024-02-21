@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AddComent from "../components/AddComent";
+import AddReview from "../components/AddReview";
 export default function PlaceDetailPage () {
     const [place, setPlace] = useState({});
     const { id } = useParams();
@@ -24,7 +24,7 @@ export default function PlaceDetailPage () {
                 </div>
             </article>
             <article>
-                <AddComent id={id} setPlace={setPlace} place={place}/>
+                <AddReview id={id} setPlace={setPlace} place={place}/>
             </article>
         </div>
     )

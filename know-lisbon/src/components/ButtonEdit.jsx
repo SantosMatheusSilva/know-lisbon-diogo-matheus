@@ -15,28 +15,18 @@ export default function ButtonEdit({ currentItem, onEdit, setFilteredData }) {
   function toggleEditing() {
     setEditing(!editing);
   }
-
-  function handleSave(event, name, type, address, description) {
-    event.preventDefault();
-    setData(prevData => {
-      return prevData.map(item => {
-        if (item.id === currentItem.id) {
-          return {
-            ...item,
-            name: name,
-            type: type,
-            address: address,
-            description: description
-          };
-        } 
-        else {
-          return item;
-        }
-      });
-    });
   
-    setEditing(false);
-  }
+    function handleSave(event, name , address, description) {
+      event.preventDefault();
+      const updatedItem = {
+        ...currentItem,
+        name: name,
+        address: address,
+        description: description
+      };
+      onEdit(updatedItem);
+      setEditing(false);
+    }
 
   return (
     <>
@@ -45,13 +35,11 @@ export default function ButtonEdit({ currentItem, onEdit, setFilteredData }) {
             <form onSubmit={(event) => handleSave(
                 event,
                 event.target.name.value,
-                event.target.type.value,
                 event.target.address.value,
                 event.target.description.value
               )}>
               
             <input type="text" name="name" defaultValue={currentItem.name} />
-            <input type="text" name="type" defaultValue={currentItem.type} />
             <input type="text" name="address" defaultValue={currentItem.address} />
             <input type="text" name="description" defaultValue={currentItem.description} />
             <button type="submit">Save</button>

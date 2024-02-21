@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function AddComment(props) {
+export default function AddReview(props) {
     const [comment, setComment] = useState("");
     const [name, setName] = useState("");
     const [comments, setComments] = useState([]);
@@ -27,7 +27,7 @@ export default function AddComment(props) {
     return (
         <section>
             <div className="comments-container">
-                <h2>Comments</h2>
+                <h2>Reviews</h2>
                 {comments.map((comment, index) => {
                     return (
                         <div key={index} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
@@ -37,8 +37,8 @@ export default function AddComment(props) {
                     )
                 })}
             </div>
-            <h2 style={{ display: "flex", alignItems: "flex-start" }}>
-                Leave a Comment
+            <h2 style={{ display: "flex", alignItems: "flex-start", fontSize: "20px" }}>
+                Leave a Review
             </h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -54,7 +54,7 @@ export default function AddComment(props) {
                     </div>
                     <div className="comment-div" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
                         <label htmlFor="comment">
-                            Comment:
+                            Review:
                         </label>
                         <textarea
                             type="text"
