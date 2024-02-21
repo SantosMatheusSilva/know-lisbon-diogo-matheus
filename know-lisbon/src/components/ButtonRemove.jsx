@@ -1,28 +1,27 @@
-    import { useState } from "react"
-    import React from "react"
-    import axios from "axios";
-    import "./ButtonRemove.css"
-    import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./ButtonRemove.css";
 
-    export default function ButtonRemove ({ currentItem }) {
-        const [data, setData] = useState([])
+export default function ButtonRemove({ currentItem, onRemove }) {
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
-        useEffect(() => {
-            axios.get("http://localhost:5000/data")
-            .then(res => setData(res.data))
-            .catch(err => console.log(err)) 
-        }, [])
+  useEffect(() => {
+    axios.get("http://localhost:5000/data")
+      .then(res => {
+        setData(res.data);
+      })
+      .catch(err => console.error(err));
+  }, []);
 
-        function deletePlace (item) {
-            let filterList = data.filter((currentItem) => {
-                return currentItem.id !== item.id
-            })
-            setData(filterList);
-        }
+  function deletePlace(item) {
+    const updatedData = data.filter(current => current.id !== item.id);
+    setData(updatedData);
+    onRemove(updatedData);
+  }
+    
 
-        return (
-            <div>
-            <button className="Remove" onClick={() => deletePlace(currentItem)}>Remove</button>
-            </div>
-        )
-    }
+  return (
+    <button className="Remove" onClick={() => deletePlace(currentItem)}>Remove</button>
+  );
+}

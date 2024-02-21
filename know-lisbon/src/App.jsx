@@ -1,3 +1,4 @@
+App.jsx
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 import NavBar from './components/NavBar'
@@ -7,10 +8,10 @@ import ErrorPage from './pages/ErrorPage'
 import ToKnowTheCityDetailsPage from './pages/KnowTheCityDetailsPage';
 import ToHaveFunDetailsPage from './pages/ToHaveFunDetailsPage';
 import ToMoveYourBodyDetailsPage from './pages/ToMoveYourBodyDetailsPage'
+import PlaceDetailPage from "./pages/PlaceDetailsPlace";
+
 
 function App() {
-
-
   return (
     <div>
       <NavBar />
@@ -19,11 +20,11 @@ function App() {
         <Route path="/places-to-know" element={<ToKnowTheCityDetailsPage />} />
         <Route path="/places-to-have" element={<ToHaveFunDetailsPage />} />
         <Route path="/places-to-move" element={<ToMoveYourBodyDetailsPage />} />
+        <Route path="/place-detail-page/:id" element={<PlaceDetailPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
     </div>
   )
 }
-
 export default App
