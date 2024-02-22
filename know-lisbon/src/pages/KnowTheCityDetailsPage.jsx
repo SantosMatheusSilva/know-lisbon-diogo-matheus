@@ -4,6 +4,8 @@ import SearchBar from '../components/SearchBar';
 import ButtonRemove from '../components/ButtonRemove';
 import ButtonEdit from '../components/ButtonEdit';
 import { Link } from 'react-router-dom';
+import './KnowTheCityDetailsPage.css';
+import { Box, Image, Badge, Button} from '@chakra-ui/react';
 
 export default function ToKnowTheCityDetailsPage() {
   const [data, setData] = useState([]);
@@ -51,16 +53,64 @@ export default function ToKnowTheCityDetailsPage() {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
+    {/*   <SearchBar onSearch={handleSearch} />
       {filteredData.map(item => (
-        <div key={item.id}>
-          <p>{item.image}</p>
+        <div key={item.id} className='ToKnowTheCityDetails'>
+          <img src={item.image} alt="PlaceImage" />
           <Link to={`/place-detail-page/${item.id}`}><h2>{item.name}</h2></Link>
           <p>{item.address}</p>
           <ButtonRemove currentItem={item} onRemove={handleRemove} />
           <ButtonEdit currentItem={item} onEdit={handleEdit} />
         </div>
-      ))}
+      ))} */}
+      <SearchBar onSearch={handleSearch} /> 
+     {
+      filteredData.map((item) =>{
+        return (
+          <Box  key={item.id} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' mt="50px">
+      <Image src={item.image} />
+
+      <Box p='6'>
+        <Box display='flex' alignItems='baseline'>
+           <Badge borderRadius='full' px='2' colorScheme='teal'>
+            {item.type} 
+            
+          </Badge> 
+          <Box
+            color='gray.500'
+            fontWeight='semibold'
+            letterSpacing='wide'
+            fontSize='xs'
+            textTransform='uppercase'
+            ml='2'
+          >
+            {item.name}
+          </Box>
+        </Box>
+
+        <Box
+          mt='1'
+          fontWeight='semibold'
+          as='h4'
+          lineHeight='tight'
+          noOfLines={1}
+        >
+          {item.address}
+        </Box>
+        <Link to={`/place-detail-page/${item.id}`}><Button colorScheme='teal' size='sm'>
+    Review
+  </Button>
+</Link>
+        <Box display="flex" flexDirection="column" maxW="50px" ml="20px">
+        <ButtonRemove currentItem={item} onRemove={handleRemove} />
+          <ButtonEdit currentItem={item} onEdit={handleEdit} />
+          </Box>
+      </Box>
+    </Box>
+        );
+      })
+     }
+
     </div>
   );
 }

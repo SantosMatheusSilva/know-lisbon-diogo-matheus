@@ -1,5 +1,6 @@
 import React from "react";
 import "./ButtonRemove.css";
+import { Button } from "@chakra-ui/react";
 
 export default function ButtonRemove({ currentItem, onRemove }) {
 
@@ -8,6 +9,7 @@ export default function ButtonRemove({ currentItem, onRemove }) {
   }
 
   return (
-    <button className="Remove" onClick={deletePlace}>Remove</button>
+    <Button colorScheme='teal' size='sm' mt="20px" onClick={deletePlace}>delete</Button>
+
   );
 }

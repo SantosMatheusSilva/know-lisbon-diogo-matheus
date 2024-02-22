@@ -54,7 +54,7 @@ export default function ToKnowTheCityDetailsPage() {
       <SearchBar onSearch={handleSearch} />
       {filteredData.map(item => (
         <div key={item.id}>
-          <p>{item.image}</p>
+          <img src={item.image} alt="place" />
           <Link to={`/place-detail-page/${item.id}`}><h2>{item.name}</h2></Link>
           <p>{item.address}</p>
           <ButtonRemove currentItem={item} onRemove={handleRemove} />

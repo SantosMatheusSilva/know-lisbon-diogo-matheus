@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { Button } from "@chakra-ui/react";
 
 export default function ButtonEdit({ currentItem, onEdit, setFilteredData }) {
   const [data, setData] = useState([]);
@@ -46,7 +47,8 @@ export default function ButtonEdit({ currentItem, onEdit, setFilteredData }) {
             <button onClick={toggleEditing}>Cancel</button>
           </form>
         ) : (
-          <button onClick={toggleEditing}>Edit</button>
+          <Button colorScheme='green' size='sm' ml="50px" mt="20px"onClick={toggleEditing}>Edit</Button>
+         
         )
       }
     </>
