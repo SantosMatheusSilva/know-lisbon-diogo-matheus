@@ -11,11 +11,11 @@ export default function AddReview(props) {
         const newComment = { user_name: name, comment };
         const updatedPlace = { ...place, comments: [...comments, newComment] };
         setPlace((previous) => ({ ...previous, comments: [...comments, newComment] }));
-        axios.put(`http://localhost:5000/data/${id}`, updatedPlace)
+        axios.put(`https://project-json-server-diogo-matheus.onrender.com/data/${id}`, updatedPlace)
             .then(() => {
                 setComment("");
                 setName("");
-                axios.get(`http://localhost:5000/data/${id}`)
+                axios.get(`https://project-json-server-diogo-matheus.onrender.com/data/${id}`)
                     .then(response => {
                         setComments(response.data.comments);
                     })

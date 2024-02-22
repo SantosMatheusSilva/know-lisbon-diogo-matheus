@@ -6,7 +6,7 @@ export default function PlaceDetailPage () {
     const [place, setPlace] = useState({});
     const { id } = useParams();
     useEffect(() => {
-        axios.get(`http://localhost:5000/data/${id}`)
+        axios.get(`https://project-json-server-diogo-matheus.onrender.com/data/${id}`)
         .then(res => setPlace(res.data))
         .catch(err => console.log(err))
     }, [])

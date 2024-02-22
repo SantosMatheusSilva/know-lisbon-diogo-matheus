@@ -8,7 +8,7 @@ export default function ButtonEdit({ currentItem, onEdit, setFilteredData }) {
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/data")
+    axios.get("https://project-json-server-diogo-matheus.onrender.com/data")
       .then(res => setData(res.data))
       .catch(err => console.error("Error fetching data:", err));
   }, []);

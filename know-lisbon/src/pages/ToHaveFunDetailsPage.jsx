@@ -11,7 +11,7 @@ export default function ToKnowTheCityDetailsPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/data')
+    axios.get('https://project-json-server-diogo-matheus.onrender.com/data')
       .then(res => {
         const filtered = res.data.filter(item => ["restaurant", "bar", "club"].includes(item.type));
         setData(filtered);
