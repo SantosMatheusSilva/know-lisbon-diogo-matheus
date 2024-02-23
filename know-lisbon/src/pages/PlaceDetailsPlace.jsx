@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddReview from "../components/AddReview";
+import Map from "../components/Map";
 export default function PlaceDetailPage () {
     const [place, setPlace] = useState({});
     const { id } = useParams();
@@ -22,6 +23,9 @@ export default function PlaceDetailPage () {
                 <p>{place.address}</p>
                 <p>{place.description}</p>
                 </div>
+            </article>
+            <article>
+                <Map id={id}/>
             </article>
             <article>
                 <AddReview id={id} setPlace={setPlace} place={place}/>

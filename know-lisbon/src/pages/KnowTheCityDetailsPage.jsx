@@ -5,7 +5,7 @@ import ButtonRemove from '../components/ButtonRemove';
 import ButtonEdit from '../components/ButtonEdit';
 import { Link } from 'react-router-dom';
 import './KnowTheCityDetailsPage.css';
-import { Box, Image, Badge, Button} from '@chakra-ui/react';
+import { Box, Image, Badge, Button, Flex} from '@chakra-ui/react';
 
 export default function ToKnowTheCityDetailsPage() {
   const [data, setData] = useState([]);
@@ -67,6 +67,7 @@ export default function ToKnowTheCityDetailsPage() {
      {
       filteredData.map((item) =>{
         return (
+          
           <Box  key={item.id} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' mt="50px">
       <Image src={item.image} />
 
