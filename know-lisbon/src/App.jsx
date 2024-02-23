@@ -9,8 +9,6 @@ import ToKnowTheCityDetailsPage from './pages/KnowTheCityDetailsPage';
 import ToHaveFunDetailsPage from './pages/ToHaveFunDetailsPage';
 import ToMoveYourBodyDetailsPage from './pages/ToMoveYourBodyDetailsPage'
 import PlaceDetailPage from "./pages/PlaceDetailsPlace";
-
-
 function App() {
   return (
     <div>
@@ -28,3 +26,9 @@ function App() {
   )
 }
 export default App
+
+
+
+
+
+
